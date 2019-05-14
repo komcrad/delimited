@@ -8,10 +8,10 @@
 
 (defn random-record [delimiter]
   (s/join delimiter
-          [(rand-nth (s/split-lines (slurp "resources/last-names.txt")))
-           (rand-nth (s/split-lines (slurp "resources/first-names.txt")))
+          [(rand-nth (s/split-lines (slurp "test/resources/last-names.txt")))
+           (rand-nth (s/split-lines (slurp "test/resources/first-names.txt")))
            (rand-nth ["male" "female"])
-           (rand-nth (s/split-lines (slurp "resources/colors.txt")))
+           (rand-nth (s/split-lines (slurp "test/resources/colors.txt")))
            (f/unparse (f/formatter "MM/dd/yyyy")
                       (t/date-time (+ 1919 (rand-int 100))
                                    (+ 1 (rand-int 12))
