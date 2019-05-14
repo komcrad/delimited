@@ -70,7 +70,7 @@
                                "c,d,male,g,06/25/1981\n"
                                "g,h,male,g,06/25/1983\n"
                                "e,f,male,g,06/25/1982\n"))]
-      (is (= '("a" "g" "e" "c")
+      (is (= '("c" "e" "g" "a")
              (map :lastname (r/order-by :dateofbirth recs)))))
     (let [recs (r/records (str "a,b,female,b,05/23/1984\n"
                                "e,f,male,g,06/25/1982\n"))]

@@ -27,6 +27,6 @@
     (= :lastname k) (sort-by :lastname #(compare %2 %1) records)
     (= :gender k) (sort-by :gender (reverse (order-by :lastname records)))
     (= :dateofbirth k)
-    (sort-by :dateofbirth #(t/after? (date %1) (date %2)) records)
+    (sort-by :dateofbirth #(t/before? (date %1) (date %2)) records)
     :else (throw (Exception. (str "order-by only recognizes :lastname, "
                                   ":dateofbirth, or :gender keys")))))
