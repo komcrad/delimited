@@ -12,9 +12,6 @@
   :main ^:skip-aot delimited.cli
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
-             :dev {:plugins [[komcrad/lein-autoreload "0.2.0"]
-                             [lein-cloverage "1.1.1"]]
-                   :repl-options {:init-ns delimited.user
-                                  :init (delimited.user/sandbox)}}
+             :dev {:plugins [[lein-cloverage "1.1.1"]]}
              :web {:main ^:skip-aot delimited.server}})
 
