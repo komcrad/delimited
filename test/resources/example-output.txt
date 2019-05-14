@@ -1,0 +1,21 @@
+
+
+Ordered by gender:
+| :gender | :lastname | :firstname | :favoritecolor | :dateofbirth |
+|---------+-----------+------------+----------------+--------------|
+|  female |         c |          d |              r |   01/19/2014 |
+|    male |         a |          b |              o |   03/16/1994 |
+
+
+Ordered by date of birth:
+| :dateofbirth | :lastname | :firstname | :gender | :favoritecolor |
+|--------------+-----------+------------+---------+----------------|
+|   03/16/1994 |         a |          b |    male |              o |
+|   01/19/2014 |         c |          d |  female |              r |
+
+
+Ordered by last name descending:
+| :lastname | :firstname | :gender | :favoritecolor | :dateofbirth |
+|-----------+------------+---------+----------------+--------------|
+|         c |          d |  female |              r |   01/19/2014 |
+|         a |          b |    male |              o |   03/16/1994 |

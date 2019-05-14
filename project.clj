@@ -3,7 +3,12 @@
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]]
-  :main ^:skip-aot delimited.core
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [clj-time "0.15.0"]]
+  :main ^:skip-aot delimited.cli
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}
+             :dev {:plugins [[komcrad/lein-autoreload "0.2.0"]
+                             [lein-cloverage "1.1.1"]]
+                   :repl-options {:init-ns delimited.user
+                                  :init (delimited.user/sandbox)}}})
