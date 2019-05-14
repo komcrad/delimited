@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [clj-time "0.15.0"]]
-  :main ^:skip-aot delimited.core
+  :main ^:skip-aot delimited.cli
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
              :dev {:plugins [[komcrad/lein-autoreload "0.2.0"]
