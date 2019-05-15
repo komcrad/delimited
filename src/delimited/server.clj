@@ -7,16 +7,24 @@
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [clojure.data.json :as json]))
 
+; this is what will store the records
 (defonce records (atom `()))
 
-(defn records-str [coll]
+(defn records-str
+  "Converts coll to json and wraps it as a value to a :people key"
+  [coll]
   (json/write-str {:people coll}))
 
-(defn insert-record! [req]
+(defn insert-record!
+  "Takes a map and inserts the record found in :param :record
+   into our records atom"
+  [req]
   (swap! records conj (r/record (get-in req [:params :record])))
   {:status 200
    :body "SUCCESS"})
 
+; the by-something functions return a map where :body
+; is the jsonified value of the records atom ordered by something
 (defn by-gender []
   {:status 200
    :body (records-str (r/order-by :gender @records))})
@@ -29,6 +37,7 @@
   {:status 200
    :body (records-str (r/order-by :dateofbirth @records))})
 
+; compojure routing...
 (defroutes app-routes
   (POST "/records" req (insert-record! req))
   (GET "/records/gender" [] (by-gender))
@@ -36,6 +45,7 @@
   (GET "/records/name" req (by-name))
   (route/not-found "Not found"))
 
+; called by lein with-profile web run
 (defn -main [& args]
   (let [handler (wrap-defaults app-routes
                                (assoc-in site-defaults
