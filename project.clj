@@ -11,7 +11,8 @@
                  [ring/ring-defaults "0.3.2"]]
   :main ^:skip-aot delimited.cli
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}
+  :profiles {:uberjar {:aot [delimited.records delimited.cli]}
              :dev {:plugins [[lein-cloverage "1.1.1"]]}
-             :web {:main ^:skip-aot delimited.server}})
+             :web {:main ^:skip-aot delimited.server
+                   :aot [delimited.server]}})
 

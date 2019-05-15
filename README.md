@@ -1,36 +1,51 @@
 # delimited
 
-FIXME: description
+## cli app usage
 
-## Installation
+Given some file with records having fields delimited by `,`, `|`, or ` ` (space):
 
-Download from http://example.com/FIXME.
+    $ lein run test/resources/comma-sample
 
-## Usage
 
-FIXME: explanation
+Since jvm takes awhile to load, I'd recommend using a native linux binary  
 
-    $ java -jar delimited-0.1.0-standalone.jar [args]
+	$ lein uberjar
 
-## Options
+	$ sudo docker run -it -v $(pwd):/project --rm tenshi/graalvm-native-image -Dclojure.compiler.direct-linking=true -jar target/uberjar/delimited-0.1.0-SNAPSHOT-standalone.jar
 
-FIXME: listing of options this app accepts.
+Now you can run 
 
-## Examples
+    $ ./delimited-0.1.0-SNAPSHOT-standalone test/resources/comma-sample
 
-...
 
-### Bugs
+## REST API usage
 
-...
+To just run the REST API
 
-### Any Other Sections
-### That You Think
-### Might be Useful
+	$ lein with-profile web run
 
-## License
+To compile the REST API standalone jar
 
-Copyright © 2019 FIXME
+	$ lein with-profile web uberjar
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+### Interacting with the REST API
+
+Post to the server
+
+	$ curl -X POST localhost:8080/records -d "record=Shel, Darsey, male, Liliac, 02/22/1986"
+
+Here's a script that will quickly populate a bunch of records into the REST API
+
+    $ ./test/resources/populate-rest
+
+Get all records sorted by lastname
+
+	$ curl localhost:8080/records/name
+
+Get all records sorted by gender
+
+	$ curl localhost:8080/records/gender
+
+Get all records sorted by birthdate
+
+	$ curl localhost:8080/records/birthdate
