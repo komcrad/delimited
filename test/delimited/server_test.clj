@@ -14,11 +14,11 @@
   (testing "insert-record!"
     (reset! records '())
     (is (= "SUCCESS" (:body (insert-record!
-                              {:query-string "a,b,male,c,01/01/2001"}))))
+                              {:params {:record "a,b,male,c,01/01/2001"}}))))
     (is (= '({:lastname "a" :firstname "b" :gender "male" :favoritecolor "c"
               :dateofbirth "01/01/2001"})))
     (is (= "SUCCESS" (:body (insert-record!
-                              {:query-string "a,c,female,c,01/01/2001"}))))
+                              {:params {:record "a,c,female,c,01/01/2001"}}))))
     (is (= '({:lastname "a" :firstname "c" :gender "female" :favoritecolor "c"
               :dateofbirth "01/01/2001"}
              {:lastname "a" :firstname "b" :gender "male" :favoritecolor "c"
@@ -27,20 +27,19 @@
 
 (deftest by-something
   (testing "by-gender, by-name, by-birthdate"
-    (do
     (reset! records '())
     (is (= "SUCCESS" (:body (insert-record!
-                              {:query-string "a,b,male,c,01/01/2000"}))))
+                              {:params {:record "a,b,male,c,01/01/2000"}}))))
     (is (= "SUCCESS" (:body (insert-record!
-                              {:query-string "b,c,male,c,01/01/2001"}))))
+                              {:params {:record "b,c,male,c,01/01/2001"}}))))
     (is (= "SUCCESS" (:body (insert-record!
-                              {:query-string "d,e,female,c,01/01/1999"}))))
+                              {:params {:record "d,e,female,c,01/01/1999"}}))))
     (is (= "SUCCESS" (:body (insert-record!
-                              {:query-string "f,g,female,c,01/01/1998"}))))
+                              {:params {:record "f,g,female,c,01/01/1998"}}))))
     (let [people (get (json/read-str (:body (by-gender))) "people")]
       (is (= '("d" "f" "a" "b") (map #(get % "lastname") people))))
     (let [people (get (json/read-str (:body (by-name))) "people")]
       (is (= '("f" "d" "b" "a") (map #(get % "lastname") people))))
     (let [people (get (json/read-str (:body (by-birthdate))) "people")]
       (is (= '("f" "d" "a" "b") (map #(get % "lastname") people))))
-    (reset! records '()))))
+    (reset! records '())))

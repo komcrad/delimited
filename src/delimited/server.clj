@@ -13,7 +13,7 @@
   (json/write-str {:people coll}))
 
 (defn insert-record! [req]
-  (swap! records conj (r/record (:query-string req)))
+  (swap! records conj (r/record (get-in req [:params :record])))
   {:status 200
    :body "SUCCESS"})
 
