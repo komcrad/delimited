@@ -1,0 +1,16 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+echo "posting..."
+cat $DIR/comma-sample | while read line
+do
+	curl -X POST localhost:8080/records -d "record=$line" > /dev/null 2>&1
+done
+cat $DIR/pipe-sample | while read line
+do
+	curl -X POST localhost:8080/records -d "record=$line" > /dev/null 2>&1
+done
+cat $DIR/space-sample | while read line
+do
+	curl -X POST localhost:8080/records -d "record=$line" > /dev/null 2>&1
+done
+echo "done"
