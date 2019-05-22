@@ -27,14 +27,17 @@
 ; is the jsonified value of the records atom ordered by something
 (defn by-gender []
   {:status 200
+   :headers {"Content-Type" "application/json"}
    :body (records-str (r/order-by :gender @records))})
 
 (defn by-name []
   {:status 200
+   :headers {"Content-Type" "application/json"}
    :body (records-str (r/order-by :lastname @records))})
 
 (defn by-birthdate []
   {:status 200
+   :headers {"Content-Type" "application/json"}
    :body (records-str (r/order-by :dateofbirth @records))})
 
 ; compojure routing...
