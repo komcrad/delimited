@@ -5,7 +5,7 @@
             [compojure.route :as route]
             [org.httpkit.server :as http]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [clojure.data.json :as json]))
+            [cheshire.core :refer [generate-string]]))
 
 ; this is what will store the records
 (defonce records (atom `()))
@@ -13,7 +13,7 @@
 (defn records-str
   "Converts coll to json and wraps it as a value to a :people key"
   [coll]
-  (json/write-str {:people coll}))
+  (generate-string {:people coll} {:pretty true}))
 
 (defn insert-record!
   "Takes a map and inserts the record found in :param :record
